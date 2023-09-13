@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup with Image</title>
+    <style>
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 150px;
+            left:150px;
+            width: 800px;
+            height: 700px;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: start;
+            justify-content: start;
+            z-index: 1;
+            font-family: 'Poppins';
+        }
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            height: 350px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        .popup-content button{
+            margin-top: 10px;
+            border: 1px solid #1A2440;
+            border-radius:5px;
+            height: 35px;
+            width: 300px;
+            color: #fff;
+            background-color:#1A2440 ;
+        }
+        .popup-image {
+            height: 350px;
+            width: 400px;
+        }
+        .form-field {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-field input{
+            border-radius: 5px;
+            border: none;
+            height: 28px;
+            width: 300px;
+            background-color: #eeeef0;
+        }
+
+        @media screen and (max-width: 600px) {
+            .popup-content {
+                max-width: 100%;
+                padding: 10px;
+            }
+            .popup-image {
+                max-width: 100%;
+                margin: 0 auto 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="openPopup()">Open Popup</button>
+    <div id="popup" class="popup-container" onclick="openPopup()">
+        <img src="./Untitled-1 2.jpg" alt="Popup Image" class="popup-image">
+        <form action="https://sheetdb.io/api/v1/exva0fhsmms3z"  method="post" id="sheetdb-form">
+          <div class="popup-content">
+            <h2>Book Site Tour</h2>
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="data[name]">
+            </div>
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email"name="data[email]">
+            </div>
+            <div class="form-field">
+                <label for="mobile">Mobile</label>
+                <input type="tel" id="mobile" name="data[mobile]">
+            </div>
+            <button onclick="submit()">Book Now</button>
+           </div>
+       </form>
+    </div>
+
+    <script>
+         var form=document.getElementById('sheetdb-form');
+        form.addEventListener("submit",e=>{
+            e.preventDefault();
+            fetch(form.action,{
+                method : "POST",
+                body: new FormData(document.getElementById ("sheetdb-from")),
+            }).then(
+                response =>response.json()
+            ).then=(html)=>
+            {
+                window.open('d.html','_blank');
+            }
+        })
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+</body>
+</html>
